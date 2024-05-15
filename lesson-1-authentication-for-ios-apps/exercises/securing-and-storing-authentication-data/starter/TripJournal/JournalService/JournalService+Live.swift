@@ -22,8 +22,11 @@ enum NetworkError: Error {
     case failedToDecodeResponse
 }
 
+/// An unimplemented version of the `JournalService`.
 class JournalServiceLive: JournalService {
-    @Published private var token: Token?
+    @Published private var token: Token? {
+        // Use a didSet observer to save the token to Keychain when it is set, and delete it from Keychain when it is set to nil.
+    }
 
     var isAuthenticated: AnyPublisher<Bool, Never> {
         $token
@@ -50,6 +53,9 @@ class JournalServiceLive: JournalService {
             return URL(string: stringValue)
         }
     }
+
+    // Add an initializer that attempts to retrieve the token from Keychain and sets it to the token property.
+    // init() {  }
 
     func register(username: String, password: String) async throws -> Token {
         guard let url = EndPoints.register.url else {

@@ -22,8 +22,17 @@ enum NetworkError: Error {
     case failedToDecodeResponse
 }
 
+/// An unimplemented version of the `JournalService`.
 class JournalServiceLive: JournalService {
-    @Published private var token: Token?
+    @Published private var token: Token? {
+        didSet {
+            if let token = token {
+                try? KeychainHelper.shared.saveToken(token)
+            } else {
+                try? KeychainHelper.shared.deleteToken()
+            }
+        }
+    }
 
     var isAuthenticated: AnyPublisher<Bool, Never> {
         $token
@@ -49,6 +58,10 @@ class JournalServiceLive: JournalService {
         var url: URL? {
             return URL(string: stringValue)
         }
+    }
+
+    init() {
+        self.token = try? KeychainHelper.shared.getToken()
     }
 
     func register(username: String, password: String) async throws -> Token {
