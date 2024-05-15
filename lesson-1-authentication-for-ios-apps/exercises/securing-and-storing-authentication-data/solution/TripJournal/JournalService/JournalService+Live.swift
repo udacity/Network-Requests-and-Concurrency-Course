@@ -22,7 +22,6 @@ enum NetworkError: Error {
     case failedToDecodeResponse
 }
 
-/// An unimplemented version of the `JournalService`.
 class JournalServiceLive: JournalService {
     @Published private var token: Token? {
         didSet {
