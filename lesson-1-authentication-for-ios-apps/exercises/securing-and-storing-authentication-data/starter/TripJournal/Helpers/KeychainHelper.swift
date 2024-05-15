@@ -21,7 +21,7 @@ class KeychainHelper {
 
         // Delete any existing item matching the query
         // Use SecItemDelete for query as CFDictionary
-        
+
         let status = SecItemAdd(query as CFDictionary, nil)
 
         guard status == errSecSuccess else {
