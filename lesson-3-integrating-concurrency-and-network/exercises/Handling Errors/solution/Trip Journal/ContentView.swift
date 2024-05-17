@@ -81,7 +81,7 @@ private extension ContentView {
             urlRequest.addValue("application/json", forHTTPHeaderField: "content-type")
 
             let requestObject = CreateUserRequest(
-                usernames: username,
+                username: username,
                 password: password
             )
 
