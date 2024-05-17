@@ -99,17 +99,17 @@ extension ContentView {
         let data = try encoder.encode(requestBody)
         urlRequest.httpBody = data
 
-        // Send Request
-        let (responseData, _) = try await URLSession.shared.data(for: urlRequest)
+// Send Request
+let (responseData, _) = try await URLSession.shared.data(for: urlRequest)
 
-        // Decode response
-        let decoder = JSONDecoder()
-        let response = try decoder.decode(TranslationResponse.self, from: responseData)
+// Decode response
+let decoder = JSONDecoder()
+let response = try decoder.decode(TranslationResponse.self, from: responseData)
 
-        // Update UI
-        await MainActor.run {
-            translatedText = response.data.translations.translatedText
-        }
+// Update UI
+await MainActor.run {
+    translatedText = response.data.translations.translatedText
+}
     }
 }
 
