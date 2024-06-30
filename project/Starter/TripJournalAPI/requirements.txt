@@ -6,6 +6,6 @@ python-jose[cryptography]==3.3.0
 databases==0.8.0
 bcrypt==4.0.1
 passlib==1.7.4
-python-multipart==0.0.6
+python-multipart==0.0.7
 slowapi==0.1.8
 pillow==10.1.0
